@@ -1,0 +1,24 @@
+
+<div class="container">
+  <div class="row card-div">
+  <div class="col-md-3" *ngFor="let pokemon of list">
+    <div class="card">
+      
+<!--     <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h5 class="card-title">Name: {{pokemon.name}}</h5>
+      <p class="card-text">Height: {{pokemon.details.height}}</p>
+      <p class="card-text">Weight: {{pokemon.details.weight}}</p>
+      <p class="card-text">List of Abilities: </p>
+      <ul>
+        <li *ngFor="let ability of pokemon.details.abilities">
+          {{ability.ability.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+
+
