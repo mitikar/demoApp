@@ -27,13 +27,10 @@ export class AppComponent implements OnInit {
   constructor(private demoService: DemoService) { }
 
   ngOnInit() {
-    let params = new HttpParams()
-    .set('sort', 'name');
-  
-    this.getPokemonList(params);
+    this.getPokemonList();
   }
 
-  getPokemonList(params: any){
+  getPokemonList(){
     this.demoService.getData().subscribe(data =>{
       this.pokemonList = data;
       this.list = this.pokemonList.results;
@@ -47,14 +44,20 @@ export class AppComponent implements OnInit {
   }
 
  filterItem(value: any){
-   debugger;
     if(!value){
         return;
     } 
-    let params = new HttpParams()
-    .set('sort', 'name');
-  
-    this.getPokemonList(params);
+    
+    this.demoService.geSearchData(value).subscribe(data =>{
+      this.pokemonList = data;
+      this.list = this.pokemonList.results;
+      for(let i =0; i<= this.list.length; i++){
+        let url = this.pokemonList.results[i].url;
+        this.demoService.getDetails(url).subscribe(d => {
+          this.list[i].details = d;
+        })
+      }
+    })
  }
 
  handlePageSizeChange(event: any): void {
