@@ -1,5 +1,28 @@
 
-<div class="container">
+<div class="container main-div">
+  <div class="row header-div">
+    <h3>Pokemon List</h3>
+    <div class="col-md-6">
+    <input class="form-control form-control-sm pull-left search-div" type="text" placeholder="Item name..." #myInput>
+    <button type="submit" class="btn btn-primary btn-sm pull-left search-btn" (click)="filterItem(myInput.value)" >Search</button>
+  </div>
+  <div class="col-md-6">
+    <nav aria-label="Page">
+      <ul class="pagination justify-content-end">
+        <li class="page-item">
+          <a class="page-link" href="#" data-toggle="tooltip" data-placement="top"  title="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#"  data-toggle="tooltip" data-placement="top"  title="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  </div>
   <div class="row card-div">
   <div class="col-md-3" *ngFor="let pokemon of list">
     <div class="card">
@@ -18,6 +41,32 @@
     </div>
   </div>
   </div>
+</div>
+<div class="row footer-div">
+<div class="col-md-6">
+  Items per Page:
+  <select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pageSizes" [ngValue]="size">
+      {{ size }}
+    </option>
+  </select>
+</div>
+<div class="col-md-6">
+  <nav aria-label="Page">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <a class="page-link" href="#" data-toggle="tooltip" data-placement="top"  title="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#"  data-toggle="tooltip" data-placement="top"  title="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 </div>
 </div>
 

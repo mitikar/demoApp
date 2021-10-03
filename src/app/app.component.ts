@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {DemoService} from '../app/services/demo.service';
 
@@ -20,14 +21,20 @@ export class AppComponent implements OnInit {
   public pokemonList: any=[];
   public list: any=[];
   public details: any=[];
-  
+  pageSize = 10;
+  pageSizes = [10, 20, 30];
 
   constructor(private demoService: DemoService) { }
 
   ngOnInit() {
+    let params = new HttpParams()
+    .set('sort', 'name');
+  
+    this.getPokemonList(params);
+  }
 
+  getPokemonList(params: any){
     this.demoService.getData().subscribe(data =>{
-      debugger;
       this.pokemonList = data;
       this.list = this.pokemonList.results;
       for(let i =0; i<= this.list.length; i++){
@@ -36,7 +43,23 @@ export class AppComponent implements OnInit {
           this.list[i].details = d;
         })
       }
-    })  
+    }) 
   }
+
+ filterItem(value: any){
+   debugger;
+    if(!value){
+        return;
+    } 
+    let params = new HttpParams()
+    .set('sort', 'name');
+  
+    this.getPokemonList(params);
+ }
+
+ handlePageSizeChange(event: any): void {
+  this.pageSize = event.target.value;
+ 
+}
 
 }

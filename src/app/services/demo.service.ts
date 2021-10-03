@@ -8,15 +8,15 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class DemoService {
     private REST_API_SERVER = "https://pokeapi.co/api/v2/pokemon/";
+    
 
     constructor(private httpClient:HttpClient) {}
  
    
     getData() {
-        return this.httpClient.get(this.REST_API_SERVER);
+        return this.httpClient.get(this.REST_API_SERVER );
     }
     getDetails(api: any) {
-      debugger;
       return this.httpClient.get(api);
     }
 }
